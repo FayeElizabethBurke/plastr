@@ -1,12 +1,10 @@
 ---
-// Hero uses hero.mp4 from the public root (served via publicDir: ../_plastr/assets)
 ---
 
 <section id="hero" class="relative min-h-screen overflow-hidden flex flex-col">
 
   <!-- Background video -->
   <video
-    id="hero-video"
     class="absolute inset-0 w-full h-full object-cover"
     autoplay
     muted
@@ -14,46 +12,36 @@
     playsinline
     preload="auto"
   >
-    <source src="/hero-2.mp4" type="video/mp4" />
+    <source src="/assets/hero-2.mp4" type="video/mp4" />
   </video>
 
-  <!-- Overlay: subtle overall dim + strong bottom gradient for readability -->
-  <div class="absolute inset-0 bg-void/10 pointer-events-none"></div>
+  <!-- Overlays -->
+  <div class="absolute inset-0 bg-void/20 pointer-events-none"></div>
   <div
     class="absolute inset-0 pointer-events-none"
-    style="background: linear-gradient(to top, rgba(10,9,8,0.60) 0%, transparent 45%, rgba(10,9,8,0.20) 100%);"
+    style="background: linear-gradient(to top, rgba(10,9,8,0.82) 0%, rgba(10,9,8,0.1) 55%, rgba(10,9,8,0.25) 100%);"
   ></div>
 
-  <!-- Content — centred -->
-  <div class="relative z-10 flex flex-col items-center justify-center flex-1 px-6 text-center pb-20">
+  <!-- Content — bottom-left editorial layout -->
+  <div class="relative z-10 flex flex-col justify-end flex-1 pb-20 sm:pb-24">
+    <div class="container-site">
 
-    <!-- Logo mark -->
-    <div class="animate-fade mb-8" style="animation-delay: 0.1s; animation-fill-mode: both;">
-      <img
-        src="/logo-lg.jpg"
-        alt="plastr Interior Linings"
-        class="w-44 sm:w-60 mx-auto rounded-full"
-        loading="eager"
-      />
+      <p class="hero-label" style="--delay: 0.1s">
+        Interior Linings · South East Queensland
+      </p>
+
+      <h1 class="hero-wordmark" style="--delay: 0.25s">
+        plastr
+      </h1>
+
     </div>
-
-    <!-- Tagline -->
-    <p
-      class="section-label-light tracking-[0.4em] animate-fade"
-      style="animation-delay: 0.45s; animation-fill-mode: both;"
-    >
-      <span class="w-5 h-px bg-white/30 inline-block align-middle mr-3"></span>
-      Interior Linings · Brisbane
-      <span class="w-5 h-px bg-white/30 inline-block align-middle ml-3"></span>
-    </p>
-
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-    <span class="text-[10px] font-display uppercase tracking-[0.3em] text-white/30">Scroll</span>
+  <div class="absolute bottom-8 right-8 sm:right-12 lg:right-16 z-10 flex items-center gap-3">
+    <span class="text-[10px] font-display uppercase tracking-[0.3em] text-white/35">Scroll</span>
     <svg
-      class="w-4 h-4 text-white/40 scroll-indicator"
+      class="w-4 h-4 text-white/35 scroll-indicator"
       fill="none"
       viewBox="0 0 24 24"
       stroke-width="1.5"
@@ -67,14 +55,39 @@
 </section>
 
 <style>
-  /* Ensure the fade animation plays correctly outside Tailwind */
-  .animate-fade {
+  .hero-label {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.75rem;
     opacity: 0;
-    animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: heroUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--delay, 0s);
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  .hero-wordmark {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-size: clamp(5rem, 14vw, 11.5rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    opacity: 0;
+    animation: heroUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes heroUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

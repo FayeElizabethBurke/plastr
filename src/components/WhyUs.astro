@@ -33,8 +33,7 @@ const pillars = [
     <!-- Section header -->
     <div class="mb-16 sm:mb-20">
       <p class="section-label-light mb-5 animate-on-scroll">
-        <span class="w-5 h-px bg-white/20 inline-block align-middle"></span>
-        Why Choose PLASTR
+        <span class="text-white/25 font-bold mr-2">04 /</span> Why Plastr
       </p>
       <h2
         class="text-display-lg font-display font-bold text-white max-w-lg animate-on-scroll"
@@ -46,7 +45,7 @@ const pillars = [
     </div>
 
     <!-- 4-pillar bordered grid on dark -->
-    <div class="grid-bordered grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid-bordered grid-bordered-void grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
       {pillars.map((pillar, i) => (
         <div
           class="p-8 sm:p-10 flex flex-col gap-5 animate-on-scroll"
@@ -66,7 +65,7 @@ const pillars = [
             <h3 class="font-display font-bold text-white text-base mb-3">
               {pillar.title}
             </h3>
-            <p class="text-sm text-white/45 leading-relaxed">
+            <p class="text-sm text-white/80 leading-relaxed">
               {pillar.description}
             </p>
           </div>

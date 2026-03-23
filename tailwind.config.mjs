@@ -15,7 +15,7 @@ export default {
           dark: "#e9e6df",
         },
         // Muted gray for body text / labels
-        ash: "#6e6b66",
+        ash: "#57534e",
         // Light warm gray for borders / dividers
         dust: "#d5d1ca",
         // Deep black for dark sections

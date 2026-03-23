@@ -1,9 +1,10 @@
 ---
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#services", label: "Services" },
+  { href: "/#work", label: "Work" },
+  { href: "/social", label: "Follow" },
+  { href: "/#contact", label: "Contact" },
 ];
 ---
 
@@ -17,7 +18,7 @@ const navLinks = [
       <!-- Logo -->
       <a href="/" aria-label="PLASTR — Home" class="flex-shrink-0">
         <img
-          src="/logo.jpg"
+          src="/assets/logo_vector.svg"
           alt="plastr Interior Linings"
           class="h-8 w-auto"
           style="mix-blend-mode: screen;"
@@ -39,7 +40,7 @@ const navLinks = [
       <!-- CTA + mobile toggle -->
       <div class="flex items-center gap-4">
         <a
-          href="#contact"
+          href="/#contact"
           class="hidden sm:inline-flex items-center gap-2 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-white hover:text-ink"
         >
           Get a Quote
@@ -75,7 +76,7 @@ const navLinks = [
         </a>
       ))}
       <a
-        href="#contact"
+        href="/#contact"
         class="inline-flex items-center gap-2 mt-3 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase hover:bg-white hover:text-ink transition-all duration-200"
       >
         Get a Quote
