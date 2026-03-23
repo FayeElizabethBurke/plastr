@@ -1,0 +1,219 @@
+---
+// Replace FORMSPREE_ID with your actual Formspree form ID
+const FORMSPREE_ACTION = "https://formspree.io/f/YOUR_FORM_ID";
+const PHONE = "07 0000 0000"; // Replace with actual phone number
+const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
+---
+
+<section id="contact" class="bg-void py-24 sm:py-32 lg:py-40">
+  <div class="container-site">
+
+    <div class="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-24">
+
+      <!-- Left: info + CTA -->
+      <div class="animate-on-scroll">
+        <p class="section-label-light mb-6">
+          <span class="w-5 h-px bg-white/20 inline-block align-middle"></span>
+          Get in Touch
+        </p>
+
+        <h2 class="text-display-md font-display font-bold text-white mb-6">
+          Let's talk about<br />
+          your project.
+        </h2>
+
+        <p class="text-sm text-white/50 leading-relaxed max-w-sm mb-10">
+          Serving Brisbane and surrounding areas. We provide free quotes on
+          residential and commercial plastering jobs of all sizes — from a
+          single room to a full development.
+        </p>
+
+        <!-- Click-to-call -->
+        <div class="mb-8">
+          <p class="text-xs font-display uppercase tracking-[0.22em] text-white/30 mb-3">
+            Call us directly
+          </p>
+          <a
+            href={PHONE_HREF}
+            class="inline-flex items-center gap-3 text-white font-display font-bold text-2xl tracking-tight hover:text-white/70 transition-colors duration-200 group"
+            aria-label={`Call PLASTR on ${PHONE}`}
+          >
+            <svg
+              class="w-5 h-5 text-white/40 group-hover:text-white/60 transition-colors duration-200"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+              />
+            </svg>
+            {PHONE}
+          </a>
+        </div>
+
+        <!-- Location note -->
+        <div class="border-t border-white/[0.08] pt-8">
+          <p class="text-xs font-display uppercase tracking-[0.22em] text-white/30 mb-2">
+            Service Area
+          </p>
+          <p class="text-sm text-white/50">
+            Brisbane CBD, North, South, East &amp; West.<br />
+            Gold Coast and Sunshine Coast by arrangement.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="animate-on-scroll" style="transition-delay: 0.15s;">
+        <form
+          action={FORMSPREE_ACTION}
+          method="POST"
+          id="contact-form"
+          class="space-y-5"
+          novalidate
+        >
+          <!-- Spam prevention -->
+          <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="New enquiry — PLASTR" />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="form-name" class="form-label-dark">Name *</label>
+              <input
+                type="text"
+                id="form-name"
+                name="name"
+                required
+                placeholder="Your name"
+                class="form-input-dark"
+                autocomplete="name"
+              />
+            </div>
+            <div>
+              <label for="form-phone" class="form-label-dark">Phone *</label>
+              <input
+                type="tel"
+                id="form-phone"
+                name="phone"
+                required
+                placeholder="0400 000 000"
+                class="form-input-dark"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="form-suburb" class="form-label-dark">Suburb / Location</label>
+            <input
+              type="text"
+              id="form-suburb"
+              name="suburb"
+              placeholder="e.g. New Farm, Chermside"
+              class="form-input-dark"
+              autocomplete="address-level2"
+            />
+          </div>
+
+          <div>
+            <label for="form-message" class="form-label-dark">Project Details</label>
+            <textarea
+              id="form-message"
+              name="message"
+              rows="4"
+              placeholder="Tell us about your project — type of work, size, timing..."
+              class="form-input-dark resize-none"
+            ></textarea>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              id="form-submit"
+              class="btn-outline-light py-4 px-8"
+            >
+              Request a Quote
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Feedback messages -->
+          <div
+            id="form-success"
+            role="alert"
+            class="hidden p-4 border border-white/20 text-white/70 text-sm font-body bg-white/[0.05]"
+          >
+            Thanks — we'll be in touch shortly to discuss your project.
+          </div>
+
+          <div
+            id="form-error"
+            role="alert"
+            class="hidden p-4 border border-red-500/30 text-red-400 text-sm font-body bg-red-500/[0.05]"
+          >
+            Something went wrong. Please try again or call us directly.
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const successEl = document.getElementById("form-success");
+  const errorEl = document.getElementById("form-error");
+  const submitBtn = document.getElementById("form-submit") as HTMLButtonElement | null;
+
+  const originalBtnHTML = submitBtn?.innerHTML ?? "";
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form) return;
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+    }
+
+    successEl?.classList.add("hidden");
+    errorEl?.classList.add("hidden");
+
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        form.reset();
+        successEl?.classList.remove("hidden");
+      } else {
+        throw new Error("Submission failed");
+      }
+    } catch {
+      errorEl?.classList.remove("hidden");
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHTML;
+      }
+    }
+  });
+</script>

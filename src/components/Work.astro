@@ -1,0 +1,136 @@
+---
+const workVideos = [
+  {
+    src: "/hero-1.mp4",
+    label: "Residential Interior",
+    type: "Residential",
+    isMain: true,
+  },
+  {
+    src: "/hero-2.mp4",
+    label: "Commercial Fitout",
+    type: "Commercial",
+    isMain: false,
+  },
+  {
+    src: "/hero-3.mp4",
+    label: "Premium Finish",
+    type: "Finishing",
+    isMain: false,
+  },
+];
+
+const workImages = [
+  { src: "/img-1.jpg", alt: "Plastering detail — residential" },
+  { src: "/img-2.jpg", alt: "Commercial plaster finish" },
+  { src: "/img-3.jpg", alt: "Interior wall plaster" },
+  { src: "/img-4.jpg", alt: "Ceiling plaster finish" },
+  { src: "/img-5.jpg", alt: "Residential plastering" },
+  { src: "/img-6.jpg", alt: "Plaster finishing detail" },
+  { src: "/img-7.jpg", alt: "Wall plaster surface" },
+  { src: "/img-8.jpg", alt: "Premium plaster finish" },
+];
+---
+
+<section id="work" class="bg-stone-dark">
+
+  <!-- Section header -->
+  <div class="container-site pt-24 sm:pt-32 lg:pt-40 pb-12 sm:pb-16">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+      <div>
+        <p class="section-label mb-5 animate-on-scroll">
+          <span class="w-5 h-px bg-dust inline-block align-middle"></span>
+          Our Work
+        </p>
+        <h2
+          class="text-display-lg font-display font-bold text-ink animate-on-scroll"
+          style="transition-delay: 0.1s;"
+        >
+          The work<br />
+          speaks for itself.
+        </h2>
+      </div>
+      <p
+        class="text-sm text-ash max-w-xs leading-relaxed animate-on-scroll sm:text-right"
+        style="transition-delay: 0.2s;"
+      >
+        Residential homes through to large-scale commercial sites — precision
+        plastering across Brisbane and surrounds.
+      </p>
+    </div>
+  </div>
+
+  <!-- Full-bleed video grid -->
+  <div class="work-grid animate-fade" style="transition-delay: 0.15s;">
+    {workVideos.map((item) => (
+      <div class={`work-video-wrap bg-ink/[0.12] ${item.isMain ? "work-grid-main" : ""}`}>
+        <video
+          class="work-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          data-src={item.src}
+        >
+          <!-- src injected by IntersectionObserver -->
+        </video>
+
+        <!-- Hover label -->
+        <div class="work-video-label">
+          <p class="text-[10px] font-display uppercase tracking-[0.25em] text-white/50 mb-1">
+            {item.type}
+          </p>
+          <p class="text-sm font-display font-bold text-white">
+            {item.label}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Photo gallery — 4-column grid on desktop -->
+  <div class="mt-0.5 grid grid-cols-2 md:grid-cols-4 gap-0.5 animate-fade" style="transition-delay: 0.25s;">
+    {workImages.map((image) => (
+      <div class="relative overflow-hidden bg-ink/[0.06]" style="aspect-ratio: 4/3;">
+        <img
+          src={image.src}
+          alt={image.alt}
+          class="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    ))}
+  </div>
+
+  <!-- Bottom padding -->
+  <div class="pb-24 sm:pb-32 lg:pb-40"></div>
+
+</section>
+
+<script>
+  // Lazy-load work videos: inject src + play when they enter the viewport
+  const workVideos = document.querySelectorAll<HTMLVideoElement>(".work-video");
+
+  const videoObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          if (!video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+            video.load();
+          }
+          video.play().catch(() => {
+            // Autoplay blocked — fail silently
+          });
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "100px" }
+  );
+
+  workVideos.forEach((v) => videoObserver.observe(v));
+</script>

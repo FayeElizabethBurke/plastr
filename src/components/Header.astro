@@ -1,0 +1,133 @@
+---
+const navLinks = [
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-transparent"
+>
+  <div class="container-site">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+
+      <!-- Logo -->
+      <a href="/" aria-label="PLASTR — Home" class="flex-shrink-0">
+        <img
+          src="/logo.jpg"
+          alt="PLASTR"
+          class="h-8 w-auto"
+          style="filter: brightness(0) invert(1);"
+        />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-display font-medium text-white/70 hover:text-white transition-colors duration-200 tracking-wide"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA + mobile toggle -->
+      <div class="flex items-center gap-4">
+        <a
+          href="#contact"
+          class="hidden sm:inline-flex items-center gap-2 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-white hover:text-ink"
+        >
+          Get a Quote
+        </a>
+
+        <!-- Hamburger -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden flex flex-col justify-center gap-[5px] p-1 w-8 h-8"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span class="w-6 h-px bg-white block transition-all duration-300 origin-center" id="bar-1"></span>
+          <span class="w-6 h-px bg-white block transition-all duration-300" id="bar-2"></span>
+          <span class="w-4 h-px bg-white block transition-all duration-300 origin-center" id="bar-3"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <nav
+      id="mobile-nav"
+      class="flex-col gap-0 border-t border-white/[0.08] py-4"
+      aria-label="Mobile navigation"
+    >
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="block py-3 text-sm font-display font-medium text-white/70 hover:text-white transition-colors duration-200 tracking-wide"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 mt-3 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase hover:bg-white hover:text-ink transition-all duration-200"
+      >
+        Get a Quote
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const btn = document.getElementById("mobile-menu-btn");
+  const nav = document.getElementById("mobile-nav");
+  const bar1 = document.getElementById("bar-1");
+  const bar2 = document.getElementById("bar-2");
+  const bar3 = document.getElementById("bar-3");
+
+  // Transparent → solid dark on scroll
+  const SCROLL_THRESHOLD = 80;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > SCROLL_THRESHOLD) {
+        header?.classList.add("is-scrolled");
+      } else {
+        header?.classList.remove("is-scrolled");
+      }
+    },
+    { passive: true }
+  );
+
+  // Mobile menu
+  function openMenu() {
+    nav?.classList.add("is-open");
+    btn?.setAttribute("aria-expanded", "true");
+    bar1?.classList.add("rotate-45", "translate-y-[6px]");
+    bar2?.classList.add("opacity-0");
+    bar3?.classList.add("-rotate-45", "-translate-y-[6px]", "!w-6");
+  }
+
+  function closeMenu() {
+    nav?.classList.remove("is-open");
+    btn?.setAttribute("aria-expanded", "false");
+    bar1?.classList.remove("rotate-45", "translate-y-[6px]");
+    bar2?.classList.remove("opacity-0");
+    bar3?.classList.remove("-rotate-45", "-translate-y-[6px]", "!w-6");
+  }
+
+  btn?.addEventListener("click", () => {
+    nav?.classList.contains("is-open") ? closeMenu() : openMenu();
+  });
+
+  // Close on nav link tap
+  nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+</script>

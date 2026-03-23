@@ -1,0 +1,104 @@
+---
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonicalURL?: string;
+  keywords?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = "/logo.jpg",
+  canonicalURL,
+  keywords = "plastering Brisbane, residential plastering Brisbane, commercial plastering, plasterer Brisbane, plaster finishing, wall plastering",
+} = Astro.props;
+
+const fullTitle = title.includes("PLASTR") ? title : `${title} | PLASTR`;
+const siteURL = "https://plastr.com.au";
+const canonical = canonicalURL ?? Astro.url.href;
+const ogImageFull = ogImage.startsWith("http") ? ogImage : `${siteURL}${ogImage}`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: "PLASTR",
+  description:
+    "Precision plastering in Brisbane. Residential homes and commercial sites. Decades of combined experience, uncompromising attention to detail.",
+  url: siteURL,
+  areaServed: [
+    { "@type": "City", name: "Brisbane" },
+    { "@type": "AdministrativeArea", name: "Greater Brisbane" },
+  ],
+  serviceType: [
+    "Residential Plastering",
+    "Commercial Plastering",
+    "Industrial Plastering",
+    "Plaster Finishing",
+    "Cornice Installation",
+  ],
+  priceRange: "$$",
+};
+---
+
+<!doctype html>
+<html lang="en-AU" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageFull} />
+    <meta property="og:site_name" content="PLASTR" />
+    <meta property="og:locale" content="en_AU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageFull} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+
+    <!-- Inline SVG favicon — "P" on dark square -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0908'/><text y='0.88em' x='18' font-size='74' font-family='system-ui,sans-serif' font-weight='700' fill='white'>P</text></svg>"
+    />
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Scroll-triggered animations (shared IntersectionObserver) -->
+    <script>
+      const animObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              animObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.06 }
+      );
+
+      document
+        .querySelectorAll(".animate-on-scroll, .animate-fade")
+        .forEach((el) => animObserver.observe(el));
+    </script>
+  </body>
+</html>

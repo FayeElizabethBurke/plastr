@@ -1,0 +1,78 @@
+---
+const pillars = [
+  {
+    number: "01",
+    title: "Attention to Detail",
+    description:
+      "Every surface we touch is treated with precision. From seamless joins to perfectly level walls — the details are what separate a good finish from an outstanding one.",
+  },
+  {
+    number: "02",
+    title: "Proven Reliability",
+    description:
+      "We show up, we deliver, we follow through. No surprises, no chasing — just consistent, on-schedule work you can build your project around.",
+  },
+  {
+    number: "03",
+    title: "Total Professionalism",
+    description:
+      "From the first quote to the final coat, you deal with tradespeople who respect your time, your property, and your project as if it were their own.",
+  },
+  {
+    number: "04",
+    title: "Real Experience",
+    description:
+      "Decades of combined experience means we've worked across every project type. Nothing surprises us — and that confidence shows in everything we do.",
+  },
+];
+---
+
+<section id="why" class="bg-void py-24 sm:py-32 lg:py-40">
+  <div class="container-site">
+
+    <!-- Section header -->
+    <div class="mb-16 sm:mb-20">
+      <p class="section-label-light mb-5 animate-on-scroll">
+        <span class="w-5 h-px bg-white/20 inline-block align-middle"></span>
+        Why Choose PLASTR
+      </p>
+      <h2
+        class="text-display-lg font-display font-bold text-white max-w-lg animate-on-scroll"
+        style="transition-delay: 0.1s;"
+      >
+        The standard<br />
+        we hold ourselves to.
+      </h2>
+    </div>
+
+    <!-- 4-pillar bordered grid on dark -->
+    <div class="grid-bordered grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      {pillars.map((pillar, i) => (
+        <div
+          class="p-8 sm:p-10 flex flex-col gap-5 animate-on-scroll"
+          style={`transition-delay: ${i * 0.1}s;`}
+        >
+          <!-- Number -->
+          <span
+            class="font-display font-bold text-white/10 select-none"
+            style="font-size: 3.5rem; line-height: 1; letter-spacing: -0.04em;"
+            aria-hidden="true"
+          >
+            {pillar.number}
+          </span>
+
+          <!-- Content -->
+          <div>
+            <h3 class="font-display font-bold text-white text-base mb-3">
+              {pillar.title}
+            </h3>
+            <p class="text-sm text-white/45 leading-relaxed">
+              {pillar.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,266 @@
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-ink bg-stone antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-bold;
+  }
+}
+
+@layer components {
+  /* ─── Layout ─────────────────────────────────────────── */
+
+  .container-site {
+    @apply mx-auto w-full max-w-site px-6 sm:px-8 lg:px-16;
+  }
+
+  /* ─── Fluid display type ─────────────────────────────── */
+
+  .text-display-xl {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  .text-display-lg {
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+    line-height: 1.06;
+    letter-spacing: -0.028em;
+  }
+
+  .text-display-md {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+  }
+
+  /* Oversized decorative stat numbers */
+  .text-stat {
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  /* ─── Labels ─────────────────────────────────────────── */
+
+  .section-label {
+    @apply inline-flex items-center gap-3 text-xs font-display font-bold uppercase tracking-[0.25em] text-ash;
+  }
+
+  .section-label-light {
+    @apply inline-flex items-center gap-3 text-xs font-display font-bold uppercase tracking-[0.25em] text-white/40;
+  }
+
+  /* ─── Buttons ────────────────────────────────────────── */
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-ink text-white font-display font-bold
+           px-8 py-4 text-sm tracking-wide uppercase
+           transition-all duration-200 hover:bg-ink-soft hover:-translate-y-px
+           focus:outline-none focus:ring-2 focus:ring-ink focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 bg-transparent text-ink font-display font-bold
+           px-8 py-4 border border-ink text-sm tracking-wide uppercase
+           transition-all duration-200 hover:bg-ink hover:text-white
+           focus:outline-none focus:ring-2 focus:ring-ink focus:ring-offset-2;
+  }
+
+  /* For use on dark backgrounds */
+  .btn-outline-light {
+    @apply inline-flex items-center gap-2 bg-transparent text-white font-display font-bold
+           px-8 py-4 border border-white/30 text-sm tracking-wide uppercase
+           transition-all duration-200 hover:bg-white hover:text-ink hover:border-white
+           focus:outline-none;
+  }
+
+  /* ─── Forms ──────────────────────────────────────────── */
+
+  .form-input {
+    @apply w-full bg-white border border-dust text-ink placeholder-ash/60
+           px-4 py-3.5 text-sm font-body
+           focus:outline-none focus:border-ink focus:ring-0
+           transition-colors duration-150;
+  }
+
+  .form-input-dark {
+    @apply w-full bg-white/[0.07] border border-white/[0.12] text-white placeholder-white/30
+           px-4 py-3.5 text-sm font-body
+           focus:outline-none focus:border-white/40 focus:ring-0
+           transition-colors duration-150;
+  }
+
+  .form-label {
+    @apply block text-xs font-display font-bold uppercase tracking-wider text-ash mb-2;
+  }
+
+  .form-label-dark {
+    @apply block text-xs font-display font-bold uppercase tracking-wider text-white/40 mb-2;
+  }
+
+  /* ─── Bordered grid ──────────────────────────────────── */
+
+  /* Reused from Anchor brochure pattern: bg-dust parent, children fill their bg */
+  .grid-bordered {
+    @apply grid gap-px bg-dust;
+  }
+
+  .grid-bordered > * {
+    @apply bg-stone;
+  }
+
+  .grid-bordered-white > * {
+    @apply bg-white;
+  }
+
+  .grid-bordered-void > * {
+    @apply bg-void;
+  }
+
+  /* ─── Scroll animations ──────────────────────────────── */
+
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fade only — for elements that don't need to slide */
+  .animate-fade {
+    opacity: 0;
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-fade.is-visible {
+    opacity: 1;
+  }
+}
+
+/* ─── Header scroll state ─────────────────────────────── */
+
+#site-header {
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+#site-header.is-scrolled {
+  background-color: rgba(10, 9, 8, 0.96);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+}
+
+/* ─── Mobile nav ──────────────────────────────────────── */
+
+#mobile-nav {
+  display: none;
+}
+
+#mobile-nav.is-open {
+  display: flex;
+}
+
+/* ─── Scroll indicator ────────────────────────────────── */
+
+@keyframes scrollBounce {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+}
+
+.scroll-indicator {
+  animation: scrollBounce 2.2s ease-in-out infinite;
+}
+
+/* ─── Work video grid ────────────────────────────────────*/
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  height: 68vh;
+  min-height: 480px;
+}
+
+.work-grid-main {
+  grid-row: span 2;
+}
+
+@media (max-width: 767px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+    min-height: unset;
+  }
+
+  .work-grid-main {
+    grid-row: span 1;
+  }
+
+  .work-grid .work-video-wrap {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.work-video-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.work-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.work-video-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(10, 9, 8, 0.75) 0%, transparent 100%);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.work-video-wrap:hover .work-video-label {
+  opacity: 1;
+  transform: translateY(0);
+}

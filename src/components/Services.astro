@@ -1,0 +1,83 @@
+---
+const services = [
+  {
+    id: "residential",
+    title: "Residential Plastering",
+    description:
+      "New builds, renovations, and repairs across Brisbane. We plaster walls, ceilings, and cornices to an exceptional standard — the kind of finish that sets a home apart.",
+    detail: "Walls · Ceilings · Cornices · Repairs",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25" stroke="currentColor" class="w-7 h-7">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955a1.126 1.126 0 011.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+    </svg>`,
+  },
+  {
+    id: "commercial",
+    title: "Commercial & Industrial",
+    description:
+      "Large-scale projects demand consistency and experience. We deliver high-quality plaster finishes on commercial fit-outs, industrial facilities, and multi-residential developments.",
+    detail: "Commercial · Industrial · Multi-Res",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25" stroke="currentColor" class="w-7 h-7">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+    </svg>`,
+  },
+  {
+    id: "finishing",
+    title: "Finishing & Detailing",
+    description:
+      "The difference between good and exceptional is in the detail. Our premium finishing work — from seamless joints to perfectly level surfaces — sets the standard for what plastering can be.",
+    detail: "Premium Finish · Seamless · Level",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.25" stroke="currentColor" class="w-7 h-7">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+    </svg>`,
+  },
+];
+---
+
+<section id="services" class="bg-white py-24 sm:py-32 lg:py-40">
+  <div class="container-site">
+
+    <!-- Section header -->
+    <div class="mb-16">
+      <p class="section-label mb-5 animate-on-scroll">
+        <span class="w-5 h-px bg-dust inline-block align-middle"></span>
+        What We Do
+      </p>
+      <h2
+        class="text-display-lg font-display font-bold text-ink max-w-xl animate-on-scroll"
+        style="transition-delay: 0.1s;"
+      >
+        Plastering done right.<br />
+        Every time.
+      </h2>
+    </div>
+
+    <!-- Services grid — bordered pattern -->
+    <div class="grid-bordered grid-cols-1 md:grid-cols-3">
+      {services.map((service, i) => (
+        <article
+          class="p-8 sm:p-10 lg:p-12 flex flex-col gap-6 animate-on-scroll"
+          style={`transition-delay: ${i * 0.12}s;`}
+        >
+          <!-- Icon -->
+          <div class="text-ash" set:html={service.icon} />
+
+          <!-- Content -->
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-ink text-lg mb-3">
+              {service.title}
+            </h3>
+            <p class="text-sm text-ash leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+
+          <!-- Capability tags -->
+          <p class="text-[10px] font-display uppercase tracking-[0.22em] text-dust border-t border-dust pt-5">
+            {service.detail}
+          </p>
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>

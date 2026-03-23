@@ -1,0 +1,52 @@
+---
+const year = new Date().getFullYear();
+
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<footer class="bg-void border-t border-white/[0.06] py-12 sm:py-16">
+  <div class="container-site">
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 pb-10 border-b border-white/[0.06]">
+
+      <!-- Brand -->
+      <a href="/" aria-label="PLASTR — Home" class="flex-shrink-0">
+        <img
+          src="/logo.jpg"
+          alt="PLASTR"
+          class="h-7 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200"
+          style="filter: brightness(0) invert(1);"
+        />
+      </a>
+
+      <!-- Nav -->
+      <nav aria-label="Footer navigation" class="flex flex-wrap gap-x-8 gap-y-3">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="text-xs font-display font-medium uppercase tracking-[0.18em] text-white/40 hover:text-white/80 transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <p class="text-xs text-white/25">
+        &copy; {year} PLASTR. All rights reserved. Brisbane, QLD.
+      </p>
+      <p class="text-xs text-white/25">
+        Precision plastering — residential &amp; commercial.
+      </p>
+    </div>
+
+  </div>
+</footer>
