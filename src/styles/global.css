@@ -208,14 +208,14 @@
 .work-grid {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
   gap: 2px;
-  height: 68vh;
-  min-height: 480px;
+  height: 80vh;
+  min-height: 540px;
 }
 
 .work-grid-main {
-  grid-row: span 2;
+  grid-row: span 3;
 }
 
 @media (max-width: 767px) {
