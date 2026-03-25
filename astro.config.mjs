@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   integrations: [tailwind({ applyBaseStyles: false })],
   output: "static",
-  site: "https://plastr.com.au",
+  site: "https://fayeelizabethburke.github.io",
+  base: "/plastr",
   build: { assets: "_assets" },
 });

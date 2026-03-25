@@ -1,10 +1,12 @@
 ---
+import { b } from '../utils/base';
+
 const navLinks = [
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#work", label: "Work" },
-  { href: "/social", label: "Follow" },
-  { href: "/#contact", label: "Contact" },
+  { href: `${b}/#about`, label: "About" },
+  { href: `${b}/#services`, label: "Services" },
+  { href: `${b}/#work`, label: "Work" },
+  { href: `${b}/social`, label: "Follow" },
+  { href: `${b}/#contact`, label: "Contact" },
 ];
 ---
 
@@ -16,7 +18,7 @@ const navLinks = [
     <div class="flex items-center justify-between h-16 sm:h-20">
 
       <!-- Logo -->
-      <a href="/" aria-label="PLASTR — Home" class="flex-shrink-0">
+      <a href={`${b}/`} aria-label="plastr — Home" class="flex-shrink-0">
         <img
           src="/assets/logo_vector.svg"
           alt="plastr Interior Linings"
@@ -40,7 +42,7 @@ const navLinks = [
       <!-- CTA + mobile toggle -->
       <div class="flex items-center gap-4">
         <a
-          href="/#contact"
+          href={`${b}/#contact`}
           class="hidden sm:inline-flex items-center gap-2 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-white hover:text-ink"
         >
           Get a Quote
@@ -76,7 +78,7 @@ const navLinks = [
         </a>
       ))}
       <a
-        href="/#contact"
+        href={`${b}/#contact`}
         class="inline-flex items-center gap-2 mt-3 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase hover:bg-white hover:text-ink transition-all duration-200"
       >
         Get a Quote
@@ -93,13 +95,10 @@ const navLinks = [
   const bar2 = document.getElementById("bar-2");
   const bar3 = document.getElementById("bar-3");
 
-  // Transparent → solid dark on scroll
-  const SCROLL_THRESHOLD = 80;
-
   window.addEventListener(
     "scroll",
     () => {
-      if (window.scrollY > SCROLL_THRESHOLD) {
+      if (window.scrollY > 80) {
         header?.classList.add("is-scrolled");
       } else {
         header?.classList.remove("is-scrolled");
@@ -108,7 +107,6 @@ const navLinks = [
     { passive: true }
   );
 
-  // Mobile menu
   function openMenu() {
     nav?.classList.add("is-open");
     btn?.setAttribute("aria-expanded", "true");
@@ -129,6 +127,5 @@ const navLinks = [
     nav?.classList.contains("is-open") ? closeMenu() : openMenu();
   });
 
-  // Close on nav link tap
   nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
 </script>

@@ -1,12 +1,14 @@
 ---
+import { b } from '../utils/base';
+
 const year = new Date().getFullYear();
 
 const links = [
-  { href: "/#about", label: "About" },
-  { href: "/#services", label: "Services" },
-  { href: "/#work", label: "Work" },
-  { href: "/social", label: "Follow" },
-  { href: "/#contact", label: "Contact" },
+  { href: `${b}/#about`, label: "About" },
+  { href: `${b}/#services`, label: "Services" },
+  { href: `${b}/#work`, label: "Work" },
+  { href: `${b}/social`, label: "Follow" },
+  { href: `${b}/#contact`, label: "Contact" },
 ];
 
 const INSTAGRAM_URL = "https://www.instagram.com/drywallgangsters/";
@@ -18,7 +20,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/drywallgangsters/";
     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 pb-10 border-b border-white/[0.06]">
 
       <!-- Brand -->
-      <a href="/" aria-label="PLASTR — Home" class="flex-shrink-0">
+      <a href={`${b}/`} aria-label="plastr — Home" class="flex-shrink-0">
         <img
           src="/assets/logo.jpg"
           alt="plastr Interior Linings"
