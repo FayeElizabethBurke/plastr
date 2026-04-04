@@ -9,10 +9,10 @@ const { src, class: className = "" } = Astro.props;
 <video
   class={className}
   src={src}
+  playsinline
   autoplay
   muted
   loop
-  playsinline
   preload="auto"
   data-autovideo
 ></video>
