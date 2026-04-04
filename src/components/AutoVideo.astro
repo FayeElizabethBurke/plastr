@@ -4,12 +4,9 @@ interface Props {
   class?: string;
 }
 const { src, class: className = "" } = Astro.props;
-
-const id = `video-${Math.random().toString(36).slice(2)}`;
 ---
 
 <video
-  id={id}
   class={className}
   src={src}
   autoplay
@@ -17,21 +14,22 @@ const id = `video-${Math.random().toString(36).slice(2)}`;
   loop
   playsinline
   preload="auto"
+  data-autovideo
 ></video>
 
 <script>
-  const el = document.getElementById("{id}");
+  function initVideos() {
+    document.querySelectorAll<HTMLVideoElement>("video[data-autovideo]").forEach((v) => {
+      v.muted = true;
+      const tryPlay = () => v.play().catch(() => {});
+      v.addEventListener("canplay", tryPlay, { once: true });
+      tryPlay();
+    });
+  }
 
-  if (el instanceof HTMLVideoElement) {
-    el.muted = true;
-
-    const tryPlay = () => {
-      el.play().catch(() => {
-      });
-    };
-    tryPlay();
-
-    el.addEventListener("loadeddata", tryPlay, { once: true });
-    el.addEventListener("canplay", tryPlay, { once: true });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initVideos);
+  } else {
+    initVideos();
   }
 </script>
