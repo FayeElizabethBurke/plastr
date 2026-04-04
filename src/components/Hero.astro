@@ -95,6 +95,10 @@ import { b } from '../utils/base';
 <script>
   const video = document.querySelector<HTMLVideoElement>("#hero video");
   if (video) {
-    video.play().catch(() => {});
+    if (video.readyState >= 2) {
+      video.play().catch(() => {});
+    } else {
+      video.addEventListener("loadedmetadata", () => video.play().catch(() => {}), { once: true });
+    }
   }
 </script>

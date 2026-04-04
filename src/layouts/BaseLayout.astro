@@ -82,6 +82,19 @@ const schema = {
   <body>
     <slot />
 
+    <!-- iOS autoplay unlock: play all muted videos on first touch -->
+    <script>
+      function playAllVideos() {
+        document.querySelectorAll<HTMLVideoElement>("video[muted]").forEach((v) => {
+          v.play().catch(() => {});
+        });
+      }
+      // Try immediately (works on Android and desktop)
+      playAllVideos();
+      // On first touch, re-trigger inside a user gesture context (required by iOS)
+      document.addEventListener("touchstart", playAllVideos, { once: true });
+    </script>
+
     <!-- Scroll-triggered animations (shared IntersectionObserver) -->
     <script>
       const animObserver = new IntersectionObserver(
