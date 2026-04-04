@@ -204,3 +204,10 @@ const HANDLE = "@drywallgangsters";
     }
   }
 </style>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>("section video");
+  if (video) {
+    video.play().catch(() => {});
+  }
+</script>

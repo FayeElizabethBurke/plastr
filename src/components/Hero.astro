@@ -92,3 +92,10 @@ import { b } from '../utils/base';
     }
   }
 </style>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>("#hero video");
+  if (video) {
+    video.play().catch(() => {});
+  }
+</script>

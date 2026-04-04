@@ -102,10 +102,12 @@ const workVideos = [
           if (!video.src && video.dataset.src) {
             video.src = video.dataset.src;
             video.load();
+            video.addEventListener("canplay", () => {
+              video.play().catch(() => {});
+            }, { once: true });
+          } else {
+            video.play().catch(() => {});
           }
-          video.play().catch(() => {
-            // Autoplay blocked — fail silently
-          });
         } else {
           video.pause();
         }
