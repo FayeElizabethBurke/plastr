@@ -1,5 +1,6 @@
 ---
 import { b } from '../utils/base';
+import AutoVideo from './AutoVideo.astro';
 
 const workVideos = [
   {
@@ -61,15 +62,7 @@ const workVideos = [
   <div class="work-grid animate-fade" style="transition-delay: 0.15s;">
     {workVideos.map((item) => (
       <div class={`work-video-wrap bg-ink/[0.12] ${item.isMain ? "work-grid-main" : ""}`}>
-        <video
-          class="work-video"
-          src={item.src}
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="metadata"
-        ></video>
+        <AutoVideo src={item.src} class="work-video" />
 
         <!-- Hover label -->
         <div class="work-video-label">
@@ -98,7 +91,6 @@ const workVideos = [
       entries.forEach((entry) => {
         const video = entry.target as HTMLVideoElement;
         if (entry.isIntersecting) {
-          video.muted = true;
           video.play().catch(() => {});
         } else {
           video.pause();

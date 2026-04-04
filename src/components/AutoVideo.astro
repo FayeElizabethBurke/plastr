@@ -1,0 +1,29 @@
+---
+interface Props {
+  src: string;
+  class?: string;
+}
+const { src, class: className = "" } = Astro.props;
+---
+
+<video
+  class={className}
+  src={src}
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+></video>
+
+<script>
+  // Ensure muted is set as a property (not just attribute) before play — required by some mobile browsers
+  document.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach((v) => {
+    v.muted = true;
+    if (v.readyState >= 2) {
+      v.play().catch(() => {});
+    } else {
+      v.addEventListener("canplay", () => { v.muted = true; v.play().catch(() => {}); }, { once: true });
+    }
+  });
+</script>

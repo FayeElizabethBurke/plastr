@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { b } from "../utils/base";
+import AutoVideo from "../components/AutoVideo.astro";
 
 const INSTAGRAM_URL = "https://www.instagram.com/drywallgangsters/";
 const HANDLE = "@drywallgangsters";
@@ -20,15 +21,7 @@ const HANDLE = "@drywallgangsters";
     <!-- ─── Full-screen video hero ─────────────────────── -->
     <section class="relative min-h-screen overflow-hidden flex flex-col">
 
-      <video
-        class="absolute inset-0 w-full h-full object-cover"
-        src={`${b}/assets/hero-4.mp4`}
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-      ></video>
+      <AutoVideo src={`${b}/assets/hero-4.mp4`} class="absolute inset-0 w-full h-full object-cover" />
 
       <!-- Overlay -->
       <div class="absolute inset-0 bg-void/40 pointer-events-none"></div>
@@ -204,10 +197,3 @@ const HANDLE = "@drywallgangsters";
   }
 </style>
 
-<script>
-  const video = document.querySelector<HTMLVideoElement>("section video");
-  if (video) {
-    video.muted = true;
-    video.play().catch(() => {});
-  }
-</script>

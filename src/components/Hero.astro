@@ -1,19 +1,12 @@
 ---
 import { b } from '../utils/base';
+import AutoVideo from './AutoVideo.astro';
 ---
 
 <section id="hero" class="relative min-h-screen overflow-hidden flex flex-col">
 
   <!-- Background video -->
-  <video
-    class="absolute inset-0 w-full h-full object-cover"
-    src={`${b}/assets/hero-2.mp4`}
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-  ></video>
+  <AutoVideo src={`${b}/assets/hero-2.mp4`} class="absolute inset-0 w-full h-full object-cover" />
 
   <!-- Overlays -->
   <div class="absolute inset-0 bg-void/20 pointer-events-none"></div>
@@ -92,14 +85,3 @@ import { b } from '../utils/base';
   }
 </style>
 
-<script>
-  const video = document.querySelector<HTMLVideoElement>("#hero video");
-  if (video) {
-    video.muted = true;
-    if (video.readyState >= 2) {
-      video.play().catch(() => {});
-    } else {
-      video.addEventListener("loadedmetadata", () => { video.muted = true; video.play().catch(() => {}); }, { once: true });
-    }
-  }
-</script>
