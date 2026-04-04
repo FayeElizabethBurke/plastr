@@ -1,18 +1,24 @@
 ---
 import { b } from '../utils/base';
 
+interface Props {
+  solidNav?: boolean;
+}
+const { solidNav = false } = Astro.props;
+
 const navLinks = [
   { href: `${b}/#about`, label: "About" },
   { href: `${b}/#services`, label: "Services" },
   { href: `${b}/#work`, label: "Work" },
   { href: `${b}/social`, label: "Follow" },
-  { href: `${b}/#contact`, label: "Contact" },
+  { href: `${b}/contact`, label: "Contact" },
 ];
 ---
 
 <header
   id="site-header"
-  class="fixed top-0 left-0 right-0 z-50 border-b border-transparent"
+  class={`fixed top-0 left-0 right-0 z-50 border-b border-transparent${solidNav ? " is-scrolled" : ""}`}
+  data-solid-nav={solidNav ? "true" : undefined}
 >
   <div class="container-site">
     <div class="flex items-center justify-between h-16 sm:h-20">
@@ -42,7 +48,7 @@ const navLinks = [
       <!-- CTA + mobile toggle -->
       <div class="flex items-center gap-4">
         <a
-          href={`${b}/#contact`}
+          href={`${b}/contact`}
           class="hidden sm:inline-flex items-center gap-2 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-white hover:text-ink"
         >
           Get a Quote
@@ -78,7 +84,7 @@ const navLinks = [
         </a>
       ))}
       <a
-        href={`${b}/#contact`}
+        href={`${b}/contact`}
         class="inline-flex items-center gap-2 mt-3 border border-white/30 text-white font-display font-bold px-5 py-2.5 text-xs tracking-widest uppercase hover:bg-white hover:text-ink transition-all duration-200"
       >
         Get a Quote
@@ -95,17 +101,19 @@ const navLinks = [
   const bar2 = document.getElementById("bar-2");
   const bar3 = document.getElementById("bar-3");
 
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (window.scrollY > 80) {
-        header?.classList.add("is-scrolled");
-      } else {
-        header?.classList.remove("is-scrolled");
-      }
-    },
-    { passive: true }
-  );
+  if (!header?.dataset.solidNav) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY > 80) {
+          header?.classList.add("is-scrolled");
+        } else {
+          header?.classList.remove("is-scrolled");
+        }
+      },
+      { passive: true }
+    );
+  }
 
   function openMenu() {
     nav?.classList.add("is-open");
