@@ -59,13 +59,13 @@ const workVideos = [
   </div>
 
   <!-- Full-bleed video grid -->
-  <div class="work-grid animate-fade" style="transition-delay: 0.15s;">
+  <div class="work-grid">
     {workVideos.map((item) => (
       <div class={`work-video-wrap bg-ink/[0.12] ${item.isMain ? "work-grid-main" : ""}`}>
         <AutoVideo src={item.src} class="work-video" />
 
-        <!-- Hover label -->
-        <div class="work-video-label">
+        <!-- Hover label — fades in separately so videos are never hidden -->
+        <div class="work-video-label animate-fade" style="transition-delay: 0.15s;">
           <p class="text-[10px] font-display uppercase tracking-[0.25em] text-white/50 mb-1">
             {item.type}
           </p>
