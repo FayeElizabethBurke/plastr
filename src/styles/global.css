@@ -106,9 +106,9 @@
   }
 
   .form-input-dark {
-    @apply w-full bg-white/[0.07] border border-white/[0.12] text-white placeholder-white/30
+    @apply w-full bg-white/[0.12] border border-white/30 text-white placeholder-white/40
            px-4 py-3.5 text-sm font-body
-           focus:outline-none focus:border-white/40 focus:ring-0
+           focus:outline-none focus:border-white/70 focus:ring-0
            transition-colors duration-150;
   }
 
@@ -117,7 +117,7 @@
   }
 
   .form-label-dark {
-    @apply block text-xs font-display font-bold uppercase tracking-wider text-white/60 mb-2;
+    @apply block text-xs font-display font-bold uppercase tracking-wider text-white/80 mb-2;
   }
 
   /* ─── Bordered grid ──────────────────────────────────── */
