@@ -63,14 +63,13 @@ const workVideos = [
       <div class={`work-video-wrap bg-ink/[0.12] ${item.isMain ? "work-grid-main" : ""}`}>
         <video
           class="work-video"
+          src={item.src}
+          autoplay
           muted
           loop
           playsinline
-          preload="none"
-          data-src={item.src}
-        >
-          <!-- src injected by IntersectionObserver -->
-        </video>
+          preload="metadata"
+        ></video>
 
         <!-- Hover label -->
         <div class="work-video-label">
@@ -91,7 +90,7 @@ const workVideos = [
 </section>
 
 <script>
-  // Lazy-load work videos: inject src + play when they enter the viewport
+  // Play/pause work videos based on viewport visibility
   const workVideos = document.querySelectorAll<HTMLVideoElement>(".work-video");
 
   const videoObserver = new IntersectionObserver(
@@ -99,15 +98,7 @@ const workVideos = [
       entries.forEach((entry) => {
         const video = entry.target as HTMLVideoElement;
         if (entry.isIntersecting) {
-          if (!video.src && video.dataset.src) {
-            video.src = video.dataset.src;
-            video.load();
-            video.addEventListener("canplay", () => {
-              video.play().catch(() => {});
-            }, { once: true });
-          } else {
-            video.play().catch(() => {});
-          }
+          video.play().catch(() => {});
         } else {
           video.pause();
         }

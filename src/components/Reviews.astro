@@ -55,10 +55,11 @@ const reviews = [
     </div>
 
     <!-- Review cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0.5">
+    <div class="-mx-4 sm:mx-0 overflow-x-auto snap-x snap-mandatory">
+      <div class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-0.5 px-4 sm:px-0 pb-4 sm:pb-0">
       {reviews.map((review, i) => (
         <div
-          class="bg-ink/[0.04] p-8 flex flex-col gap-6 animate-on-scroll"
+          class="flex-shrink-0 w-[80vw] sm:w-auto snap-start bg-ink/[0.04] p-8 flex flex-col gap-6 animate-on-scroll"
           style={`transition-delay: ${0.05 * i}s;`}
         >
           <!-- Stars -->
@@ -82,6 +83,7 @@ const reviews = [
           </div>
         </div>
       ))}
+      </div>
     </div>
 
   </div>

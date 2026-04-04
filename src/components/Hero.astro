@@ -7,14 +7,13 @@ import { b } from '../utils/base';
   <!-- Background video -->
   <video
     class="absolute inset-0 w-full h-full object-cover"
+    src={`${b}/assets/hero-2.mp4`}
     autoplay
     muted
     loop
     playsinline
-    preload="auto"
-  >
-    <source src={`${b}/assets/hero-2.mp4`} type="video/mp4" />
-  </video>
+    preload="metadata"
+  ></video>
 
   <!-- Overlays -->
   <div class="absolute inset-0 bg-void/20 pointer-events-none"></div>

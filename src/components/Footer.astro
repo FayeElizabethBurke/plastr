@@ -45,9 +45,19 @@ const INSTAGRAM_URL = "https://www.instagram.com/drywallgangsters/";
 
     <!-- Bottom bar -->
     <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-      <p class="text-xs text-white/45">
-        &copy; {year} Plastr Interior Linings. All rights reserved.
-      </p>
+      <div class="flex flex-col gap-1">
+        <p class="text-xs text-white/45">
+          &copy; {year} Plastr Interior Linings. All rights reserved.
+        </p>
+        <a
+          href="https://anchor-web.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[11px] text-white/55 hover:text-white transition-colors duration-200"
+        >
+          Website by <span class="font-semibold">Anchor Websites</span>
+        </a>
+      </div>
       <a
         href={INSTAGRAM_URL}
         target="_blank"

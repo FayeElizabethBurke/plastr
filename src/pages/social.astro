@@ -22,14 +22,13 @@ const HANDLE = "@drywallgangsters";
 
       <video
         class="absolute inset-0 w-full h-full object-cover"
+        src={`${b}/assets/hero-4.mp4`}
         autoplay
         muted
         loop
         playsinline
-        preload="auto"
-      >
-        <source src={`${b}/assets/hero-4.mp4`} type="video/mp4" />
-      </video>
+        preload="metadata"
+      ></video>
 
       <!-- Overlay -->
       <div class="absolute inset-0 bg-void/40 pointer-events-none"></div>
