@@ -17,19 +17,29 @@ const { src, class: className = "" } = Astro.props;
   data-autovideo
 ></video>
 
-<script>
-  function initVideos() {
-    document.querySelectorAll<HTMLVideoElement>("video[data-autovideo]").forEach((v) => {
-      v.muted = true;
-      const tryPlay = () => v.play().catch(() => {});
-      v.addEventListener("canplay", tryPlay, { once: true });
-      tryPlay();
-    });
-  }
+<script is:inline>
+  (function () {
+    function playAll() {
+      document.querySelectorAll("video[data-autovideo]").forEach(function (v) {
+        v.muted = true;
+        v.play().catch(function () {});
+      });
+    }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initVideos);
-  } else {
-    initVideos();
-  }
+    // Try immediately — works on Android/desktop and some iOS
+    playAll();
+
+    // Re-try once any data is available on each video
+    document.querySelectorAll("video[data-autovideo]").forEach(function (v) {
+      v.addEventListener("canplay", function () {
+        v.muted = true;
+        v.play().catch(function () {});
+      }, { once: true });
+    });
+
+    // iOS fallback: first touch/scroll unlocks media playback
+    // ["touchstart", "touchend", "scroll"].forEach(function (evt) {
+    //   document.addEventListener(evt, playAll, { once: true, passive: true });
+    // });
+  })();
 </script>
