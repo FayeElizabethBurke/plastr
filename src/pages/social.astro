@@ -207,6 +207,7 @@ const HANDLE = "@drywallgangsters";
 <script>
   const video = document.querySelector<HTMLVideoElement>("section video");
   if (video) {
+    video.muted = true;
     video.play().catch(() => {});
   }
 </script>

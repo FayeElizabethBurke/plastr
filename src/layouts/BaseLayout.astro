@@ -85,6 +85,7 @@ const schema = {
     <!-- iOS autoplay unlock -->
     <script>
       function tryPlay(v: HTMLVideoElement) {
+        v.muted = true;
         v.play().catch(() => {});
       }
 
@@ -94,6 +95,7 @@ const schema = {
 
       // Attach a canplay listener to every video so each plays as soon as it has data
       document.querySelectorAll<HTMLVideoElement>("video[muted]").forEach((v) => {
+        v.muted = true;
         v.addEventListener("canplay", () => tryPlay(v), { once: true });
         tryPlay(v);
       });
