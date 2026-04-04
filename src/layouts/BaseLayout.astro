@@ -82,16 +82,26 @@ const schema = {
   <body>
     <slot />
 
-    <!-- iOS autoplay unlock: play all muted videos on first touch -->
+    <!-- iOS autoplay unlock -->
     <script>
-      function playAllVideos() {
-        document.querySelectorAll<HTMLVideoElement>("video[muted]").forEach((v) => {
-          v.play().catch(() => {});
-        });
+      function tryPlay(v: HTMLVideoElement) {
+        v.play().catch(() => {});
       }
-      // Try immediately (works on Android and desktop)
-      playAllVideos();
-      // On first touch, re-trigger inside a user gesture context (required by iOS)
+
+      function playAllVideos() {
+        document.querySelectorAll<HTMLVideoElement>("video[muted]").forEach(tryPlay);
+      }
+
+      // Attach a canplay listener to every video so each plays as soon as it has data
+      document.querySelectorAll<HTMLVideoElement>("video[muted]").forEach((v) => {
+        v.addEventListener("canplay", () => tryPlay(v), { once: true });
+        tryPlay(v);
+      });
+
+      // Retry once everything on the page has loaded
+      window.addEventListener("load", playAllVideos);
+
+      // iOS user-gesture unlock: first touch re-fires play() in gesture context
       document.addEventListener("touchstart", playAllVideos, { once: true });
     </script>
 
