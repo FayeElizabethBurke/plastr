@@ -22,7 +22,7 @@ const workVideos = [
     isMain: false,
   },
   {
-    src: `${b}/assets/hero_stripped.mp4`,
+    src: `${b}/assets/hero.mp4`,
     label: "Interior Linings",
     type: "Linings",
     isMain: false,
@@ -62,7 +62,7 @@ const workVideos = [
   <div class="work-grid">
     {workVideos.map((item) => (
       <div class={`work-video-wrap bg-ink/[0.12] ${item.isMain ? "work-grid-main" : ""}`}>
-        <AutoVideo src={item.src} class="work-video" />
+        <AutoVideo src={item.src} class="work-video" pauseOffscreen />
 
         <!-- Hover label — fades in separately so videos are never hidden -->
         <div class="work-video-label animate-fade" style="transition-delay: 0.15s;">
@@ -82,23 +82,3 @@ const workVideos = [
 
 </section>
 
-<script>
-  // Play/pause work videos based on viewport visibility
-  const workVideos = document.querySelectorAll<HTMLVideoElement>(".work-video");
-
-  const videoObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target as HTMLVideoElement;
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: "100px" }
-  );
-
-  workVideos.forEach((v) => videoObserver.observe(v));
-</script>

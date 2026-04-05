@@ -85,3 +85,14 @@ import AutoVideo from './AutoVideo.astro';
   }
 </style>
 
+<script>
+  const video = document.querySelector<HTMLVideoElement>("#hero video");
+  if (video) {
+    video.muted = true;
+    if (video.readyState >= 2) {
+      video.play().catch(() => {});
+    } else {
+      video.addEventListener("loadedmetadata", () => { video.muted = true; video.play().catch(() => {}); }, { once: true });
+    }
+  }
+</script>

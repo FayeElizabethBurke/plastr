@@ -82,31 +82,6 @@ const schema = {
   <body>
     <slot />
 
-    <!-- iOS autoplay unlock -->
-    <script>
-      function tryPlay(v: HTMLVideoElement) {
-        v.muted = true;
-        v.play().catch(() => {});
-      }
-
-      function playAllVideos() {
-        document.querySelectorAll<HTMLVideoElement>("video[muted]").forEach(tryPlay);
-      }
-
-      // Attach a canplay listener to every video so each plays as soon as it has data
-      document.querySelectorAll<HTMLVideoElement>("video[muted]").forEach((v) => {
-        v.muted = true;
-        v.addEventListener("canplay", () => tryPlay(v), { once: true });
-        tryPlay(v);
-      });
-
-      // Retry once everything on the page has loaded
-      window.addEventListener("load", playAllVideos);
-
-      // iOS user-gesture unlock: first touch re-fires play() in gesture context
-      document.addEventListener("touchstart", playAllVideos, { once: true });
-    </script>
-
     <!-- Scroll-triggered animations (shared IntersectionObserver) -->
     <script>
       const animObserver = new IntersectionObserver(

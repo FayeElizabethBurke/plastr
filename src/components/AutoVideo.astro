@@ -2,46 +2,55 @@
 interface Props {
   src: string;
   class?: string;
+  pauseOffscreen?: boolean;
 }
-const { src, class: className = "" } = Astro.props;
+const { src, class: className = "", pauseOffscreen = false } = Astro.props;
 ---
 
 <video
   class={className}
-  src={src}
-  playsinline
   autoplay
   muted
   loop
+  playsinline
   preload="auto"
   data-autovideo
-  width="300px"
-  height="300px"
-></video>
+  data-pause-offscreen={pauseOffscreen ? "true" : undefined}
+>
+  <source src={src} type="video/mp4" />
+</video>
 
-<script is:inline>
-  (function () {
-    function playAll() {
-      document.querySelectorAll("video[data-autovideo]").forEach(function (v) {
-        v.muted = true;
-        v.play().catch(function () {});
-      });
-    }
+<script>
+  function tryPlay(v: HTMLVideoElement) {
+    v.muted = true;
+    v.play().catch(() => {});
+  }
 
-    // Try immediately — works on Android/desktop and some iOS
-    playAll();
+  function initAll() {
+    const videos = document.querySelectorAll<HTMLVideoElement>("video[data-autovideo]");
 
-    // Re-try once any data is available on each video
-    document.querySelectorAll("video[data-autovideo]").forEach(function (v) {
-      v.addEventListener("canplay", function () {
-        v.muted = true;
-        v.play().catch(function () {});
-      }, { once: true });
+    videos.forEach((v) => {
+      tryPlay(v);
+      v.addEventListener("canplay", () => tryPlay(v), { once: true });
+
+      if (v.dataset.pauseOffscreen === "true") {
+        new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) tryPlay(v);
+            else v.pause();
+          },
+          { threshold: 0.1, rootMargin: "100px" }
+        ).observe(v);
+      }
     });
 
-    // iOS fallback: first touch/scroll unlocks media playback
-    // ["touchstart", "touchend", "scroll"].forEach(function (evt) {
-    //   document.addEventListener(evt, playAll, { once: true, passive: true });
-    // });
-  })();
+    // iOS gesture unlock — re-fire play on first touch
+    document.addEventListener("touchstart", () => videos.forEach(tryPlay), { once: true, passive: true });
+  }
+
+  if (document.readyState === "complete") {
+    initAll();
+  } else {
+    window.addEventListener("load", initAll);
+  }
 </script>
