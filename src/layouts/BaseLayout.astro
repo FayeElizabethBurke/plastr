@@ -20,7 +20,9 @@ const {
 const fullTitle = title.includes("PLASTR") ? title : `${title} | PLASTR`;
 const siteURL = "https://plastr.com.au";
 const canonical = canonicalURL ?? Astro.url.href;
-const ogImageFull = ogImage.startsWith("http") ? ogImage : `${siteURL}${ogImage}`;
+const ogImageFull = ogImage.startsWith("http")
+  ? ogImage
+  : `${siteURL}${ogImage}`;
 
 const schema = {
   "@context": "https://schema.org",
@@ -70,7 +72,11 @@ const schema = {
     <meta name="twitter:image" content={ogImageFull} />
 
     <!-- Structured data -->
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(schema)}
+    />
 
     <!-- Inline SVG favicon — "P" on dark square -->
     <link
@@ -93,7 +99,7 @@ const schema = {
             }
           });
         },
-        { threshold: 0.06 }
+        { threshold: 0.06 },
       );
 
       document
