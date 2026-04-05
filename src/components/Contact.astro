@@ -5,23 +5,23 @@ const PHONE = "07 0000 0000"; // Replace with actual phone number
 const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
 ---
 
-<section id="contact" class="bg-void py-24 sm:py-32 lg:py-40">
+<section id="contact" class="bg-stone py-24 sm:py-32 lg:py-40">
   <div class="container-site">
 
     <div class="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-24">
 
       <!-- Left: info + CTA -->
       <div class="animate-on-scroll">
-        <p class="section-label-light mb-6">
-          <span class="text-white/25 font-bold mr-2">05 /</span> Contact
+        <p class="section-label mb-6">
+          <span class="text-dust font-bold mr-2">05 /</span> Contact
         </p>
 
-        <h2 class="text-display-md font-display font-bold text-white mb-6">
+        <h2 class="text-display-md font-display font-bold text-ink mb-6">
           Let's talk about<br />
           your project.
         </h2>
 
-        <p class="text-sm text-white/70 leading-relaxed max-w-sm mb-10">
+        <p class="text-sm text-ash leading-relaxed max-w-sm mb-10">
           Servicing South East Queensland. We provide free quotes on residential
           and commercial interior plastering jobs of all sizes — from a single
           room to a full development.
@@ -29,16 +29,16 @@ const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
 
         <!-- Click-to-call -->
         <div class="mb-8">
-          <p class="text-xs font-display uppercase tracking-[0.22em] text-white/55 mb-3">
+          <p class="text-xs font-display uppercase tracking-[0.22em] text-ash mb-3">
             Call us directly
           </p>
           <a
             href={PHONE_HREF}
-            class="inline-flex items-center gap-3 text-white font-display font-bold text-2xl tracking-tight hover:text-white/70 transition-colors duration-200 group"
+            class="inline-flex items-center gap-3 text-ink font-display font-bold text-2xl tracking-tight hover:text-ink/60 transition-colors duration-200 group"
             aria-label={`Call PLASTR on ${PHONE}`}
           >
             <svg
-              class="w-5 h-5 text-white/40 group-hover:text-white/60 transition-colors duration-200"
+              class="w-5 h-5 text-ash/60 group-hover:text-ash transition-colors duration-200"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="1.5"
@@ -56,11 +56,11 @@ const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
         </div>
 
         <!-- Location note -->
-        <div class="border-t border-white/[0.08] pt-8">
-          <p class="text-xs font-display uppercase tracking-[0.22em] text-white/55 mb-2">
+        <div class="border-t border-dust pt-8">
+          <p class="text-xs font-display uppercase tracking-[0.22em] text-ash mb-2">
             Service Area
           </p>
-          <p class="text-sm text-white/70">
+          <p class="text-sm text-ash">
             Brisbane, Gold Coast, Sunshine Coast<br />
             and surrounds across South East Queensland.
           </p>
@@ -82,51 +82,51 @@ const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label for="form-name" class="form-label-dark">Name *</label>
+              <label for="form-name" class="form-label">Name *</label>
               <input
                 type="text"
                 id="form-name"
                 name="name"
                 required
                 placeholder="Your name"
-                class="form-input-dark"
+                class="form-input"
                 autocomplete="name"
               />
             </div>
             <div>
-              <label for="form-phone" class="form-label-dark">Phone *</label>
+              <label for="form-phone" class="form-label">Phone *</label>
               <input
                 type="tel"
                 id="form-phone"
                 name="phone"
                 required
                 placeholder="0400 000 000"
-                class="form-input-dark"
+                class="form-input"
                 autocomplete="tel"
               />
             </div>
           </div>
 
           <div>
-            <label for="form-suburb" class="form-label-dark">Suburb / Location</label>
+            <label for="form-suburb" class="form-label">Suburb / Location</label>
             <input
               type="text"
               id="form-suburb"
               name="suburb"
               placeholder="e.g. New Farm, Chermside"
-              class="form-input-dark"
+              class="form-input"
               autocomplete="address-level2"
             />
           </div>
 
           <div>
-            <label for="form-message" class="form-label-dark">Project Details</label>
+            <label for="form-message" class="form-label">Project Details</label>
             <textarea
               id="form-message"
               name="message"
               rows="4"
               placeholder="Tell us about your project — type of work, size, timing..."
-              class="form-input-dark resize-none"
+              class="form-input resize-none"
             ></textarea>
           </div>
 
@@ -134,7 +134,7 @@ const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
             <button
               type="submit"
               id="form-submit"
-              class="btn-outline-light py-4 px-8"
+              class="btn-outline py-4 px-8"
             >
               Request a Quote
               <svg
@@ -154,7 +154,7 @@ const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
           <div
             id="form-success"
             role="alert"
-            class="hidden p-4 border border-white/20 text-white/70 text-sm font-body bg-white/[0.05]"
+            class="hidden p-4 border border-ink/20 text-ash text-sm font-body bg-ink/[0.04]"
           >
             Thanks — we'll be in touch shortly to discuss your project.
           </div>
@@ -162,7 +162,7 @@ const PHONE_HREF = "tel:+61700000000"; // Replace with actual number
           <div
             id="form-error"
             role="alert"
-            class="hidden p-4 border border-red-500/30 text-red-400 text-sm font-body bg-red-500/[0.05]"
+            class="hidden p-4 border border-red-500/30 text-red-600 text-sm font-body bg-red-500/[0.05]"
           >
             Something went wrong. Please try again or call us directly.
           </div>
