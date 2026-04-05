@@ -1,12 +1,17 @@
 ---
-import { b } from '../utils/base';
-import AutoVideo from './AutoVideo.astro';
+import { b } from "../utils/base";
+import AutoVideo from "./AutoVideo.astro";
 ---
 
-<section id="hero" class="relative min-h-screen overflow-hidden flex flex-col">
-
+<section
+  id="hero"
+  class="relative min-h-[100dvh] overflow-hidden flex flex-col"
+>
   <!-- Background video -->
-  <AutoVideo src={`${b}/assets/hero-2.mp4`} class="absolute inset-0 w-full h-full object-cover" />
+  <AutoVideo
+    src={`${b}/assets/hero-2.mp4`}
+    class="absolute inset-0 w-full h-full object-cover"
+  />
 
   <!-- Overlays -->
   <div class="absolute inset-0 bg-void/20 pointer-events-none"></div>
@@ -14,25 +19,31 @@ import AutoVideo from './AutoVideo.astro';
     class="absolute inset-0 pointer-events-none"
     style="background: linear-gradient(to top, rgba(10,9,8,0.82) 0%, rgba(10,9,8,0.1) 55%, rgba(10,9,8,0.25) 100%);"
   ></div>
+  <!-- Top gradient ensures nav/burger is always readable over video -->
+  <div
+    class="absolute top-0 left-0 right-0 h-28 pointer-events-none"
+    style="background: linear-gradient(to bottom, rgba(10,9,8,0.7) 0%, transparent 100%);"
+  ></div>
 
   <!-- Content — bottom-left editorial layout -->
   <div class="relative z-10 flex flex-col justify-end flex-1 pb-20 sm:pb-24">
     <div class="container-site">
-
       <p class="hero-label" style="--delay: 0.1s">
         Interior Linings · South East Queensland
       </p>
 
-      <h1 class="hero-wordmark" style="--delay: 0.25s">
-        plastr
-      </h1>
-
+      <h1 class="hero-wordmark" style="--delay: 0.25s">plastr</h1>
     </div>
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 right-8 sm:right-12 lg:right-16 z-10 flex items-center gap-3">
-    <span class="text-[10px] font-display uppercase tracking-[0.3em] text-white/35">Scroll</span>
+  <div
+    class="absolute bottom-8 right-8 sm:right-12 lg:right-16 z-10 flex items-center gap-3"
+  >
+    <span
+      class="text-[10px] font-display uppercase tracking-[0.3em] text-white/35"
+      >Scroll</span
+    >
     <svg
       class="w-4 h-4 text-white/35 scroll-indicator"
       fill="none"
@@ -41,10 +52,12 @@ import AutoVideo from './AutoVideo.astro';
       stroke="currentColor"
       aria-hidden="true"
     >
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
     </svg>
   </div>
-
 </section>
 
 <style>
@@ -92,7 +105,14 @@ import AutoVideo from './AutoVideo.astro';
     if (video.readyState >= 2) {
       video.play().catch(() => {});
     } else {
-      video.addEventListener("loadedmetadata", () => { video.muted = true; video.play().catch(() => {}); }, { once: true });
+      video.addEventListener(
+        "loadedmetadata",
+        () => {
+          video.muted = true;
+          video.play().catch(() => {});
+        },
+        { once: true },
+      );
     }
   }
 </script>

@@ -46,10 +46,10 @@ const pillars = [
 
     <!-- 4-pillar bordered grid on dark -->
     <div class="-mx-4 sm:mx-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
-      <div class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 sm:bg-dust px-4 sm:px-0 pb-4 sm:pb-0">
+      <div class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-0">
       {pillars.map((pillar, i) => (
         <div
-          class="flex-shrink-0 w-[80vw] sm:w-auto snap-start bg-void p-8 sm:p-10 flex flex-col gap-5 animate-on-scroll"
+          class="flex-shrink-0 w-[80vw] sm:w-auto snap-start bg-void p-8 sm:p-10 flex flex-col gap-5 animate-on-scroll border-r border-white/[0.08] last:border-r-0 sm:border-r-0 sm:border sm:border-white/[0.08]"
           style={`transition-delay: ${i * 0.1}s;`}
         >
           <!-- Number -->
